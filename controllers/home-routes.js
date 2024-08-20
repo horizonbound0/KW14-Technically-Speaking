@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
     //   include: [
     //     {
     //       model: User,
+    //       as: 'user',
     //       attributes: 'username',
     //     },
     //   ],
@@ -17,18 +18,9 @@ router.get('/', async (req, res) => {
     //   blog.get({ plain: true })
     // );
 
-    req.session.save(() => {
-      if (req.session.countVisit) {
-        req.session.countVisit++;
-      } else {
-        req.session.countVisit = 1;
-      }
-      
-      res.render('homepage', {
-        message: `countVisit: ${req.session.countVisit}`
-        // blogs,
-        // loggedIn: req.session.loggedIn,
-      });
+    res.render('homepage', {
+      // blogs,
+      loggedIn: req.session.loggedIn,
     });
 
   } catch (err) {
@@ -48,10 +40,13 @@ router.get('/login', (req, res) => {
 
 // Dashboard route
 router.get('/dashboard', (req, res) => {
-  if (req.session.loggedIn) {
-    res.render('dashboard');
-  } else {
-    res.redirect('/');
+  try {
+    res.render('dashboard', {
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
