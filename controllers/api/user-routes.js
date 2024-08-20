@@ -1,36 +1,40 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-// get users
-router.get('/', async (req, res) => {
-  /* 
+// Sign-up
+router.post('/signup', async (req, res) => {
   try {
-    const dbUserData = await User.create({
+    // password validation
+    if (req.body.password.length < 8) {
+      return res.status(400).json({
+        message: 'Password must be 8 characters or longer.',
+      });
+    }
+    const newUser = await User.create({
       username: req.body.username,
-      email: req.body.email,
       password: req.body.password,
     });
 
     req.session.save(() => {
+      req.session.user_id = newUser.id;
       req.session.loggedIn = true;
-
-      res.status(200).json(dbUserData);
+      res.status(200).json({
+        user: newUser,
+        message: 'You have signed up and are now logged in!',
+      });
     });
+    console.log('User made!');
   } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
-*/
 });
 
 // Login
 router.post('/login', async (req, res) => {
-  /* 
+  /* */
   try {
     const dbUserData = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
+      where: { username: req.body.username },
     });
 
     if (!dbUserData) {
@@ -50,12 +54,8 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
+      req.session.user_id = dbUserData.isSoftDeleted;
       req.session.loggedIn = true;
-      console.log(
-        'File: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
-        req.session.cookie
-      );
-
       res
         .status(200)
         .json({ user: dbUserData, message: 'You are now logged in!' });
@@ -64,12 +64,12 @@ router.post('/login', async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-  */
+  
 });
 
 // Logout
 router.post('/logout', (req, res) => {
-  /* 
+  /* */
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
@@ -77,7 +77,7 @@ router.post('/logout', (req, res) => {
   } else {
     res.status(404).end();
   }
-*/
+
 });
 
 module.exports = router;

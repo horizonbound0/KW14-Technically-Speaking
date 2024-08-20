@@ -16,7 +16,7 @@ const sess = {
   secret: 'Super secret secret0',
   cookie: {
     // Stored in milliseconds
-    maxAge: 24 * 60 * 60 * 1000, // expires after 1 day
+    maxAge: 60 * 60 * 1000, // expires after 1 hour
   },
   resave: false,
   saveUninitialized: true,
@@ -41,7 +41,7 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
     console.log(
-      `\nServer running on port ${PORT}. Visit http://localhost:${PORT} and create an account!`
-    )
+      `\nServer running on port ${PORT}. Visit http://localhost:${PORT} and create an account!`,
+    ),
   );
 });
