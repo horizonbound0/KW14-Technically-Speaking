@@ -1,0 +1,52 @@
+<form>
+    <div class="field">
+        <label class="label">Blog Title:</label>
+        <div class="control">
+            <input class="input" type="text" id="blog-title" placeholder="Title..." />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Blog Body:</label>
+        <div class="control">
+            <input class="textarea" type="text" id="blog-body" placeholder="Password..." />
+        </div>
+    </div>
+
+    <div class="has-text-right">
+        <button class="button is-primary" type="submit">Submit</button>
+    </div>
+</form>
+
+<section class="section">
+    <h1 class="title">Your Blogs</h1>
+    <div class="section">
+        <div class="container">
+
+            <div class="columns is-centered">
+
+                <div class="card column is-4 mb-0">
+
+                    <header class="card-header">
+                        <h2 class="card-header-title"><a href="#">Title/{{blog_title}}</a></h2>
+                    </header>
+
+                    <div class="card-content">
+                        <div class="content">
+                            <p class="subtitle">Date/{{blog_date}}</p>
+                        </div>
+                    </div>
+
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">User/{{username}}</a>
+                    </footer>
+
+                </div>
+
+            </div>
+
+            <script src="./js/login.js"></script>
+
+        </div>
+    </div>
+</section>

@@ -12,21 +12,45 @@
 
 </head>
 
-<body>
-  <header>
-    <h1>Technically Speaking</h1>
+<body class="has-background-dark">
+
+  <header class="navbar has-background-primary-dark has-shadow py-4">
+
+    <div class="navbar-brand">
+      <h1 class="title">Technically Speaking</h1>
+      <h2 class="subtitle">Blog space!-{{message}}</h2>
+    </div>
+
+    <nav class="navbar-menu">
+      <ul class="navbar-end">
+        <a href="/" class="navbar-item">Homepage</a>
+        {{#if loggedIn}}
+        <a href="/dashboard" class="navbar-item">Dashboard</a>        
+        <a href="/logout" class="navbar-item">Logout</a>
+        {{else}}
+        <a href="/login" class="navbar-item">Dashboard</a>
+        <a href="/login" class="navbar-item">Log in</a>
+        {{/if}}
+      </ul>
+    </nav>
+
   </header>
-  <nav>
-    
-  </nav>
+
   <main>
-    <aside>
-      <h2>Blog space!</h2>
-    </aside>
-    <div>
+
+    <div class="section">
       {{{body}}}
     </div>
+
   </main>
+
+  <footer class="footer has-background-primary-dark has-shadow">
+
+    <div class="content">
+      Made by Ken W
+    </div>
+
+  </footer>
   
 </body>
 

@@ -1,3 +1,35 @@
-{{#each galleries as |gallery|}}
-{{> gallery-details}}
-{{/each}}
+<section class="section has-text-centered">
+    <div>Testing homepage handlebars!</div>
+    <section class="section">
+        <h1 class="title">Blog Space</h1>
+        <div class="section">
+            <div class="container">
+
+                <div class="columns is-centered">
+
+                    <div class="card column is-4 mb-0">
+
+                        <header class="card-header">
+                            <h2 class="card-header-title"><a href="#">Title/{{blog_title}}</a></h2>
+                        </header>
+
+                        <div class="card-content">
+                            <div class="content">
+                                <p class="subtitle">Date/{{blog_date}}</p>
+                            </div>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">User/{{username}}</a>
+                        </footer>
+
+                    </div>
+                    
+                </div>
+
+                <script src="./js/login.js"></script>
+
+            </div>
+        </div>
+    </section>
+</section>
