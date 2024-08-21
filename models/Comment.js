@@ -22,9 +22,17 @@ Comment.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
                 model: 'user',
-                ley: 'id',
+                key: 'id',
+            },
+        },
+        blog_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'blog',
+                key: 'id',
             },
         },
     },

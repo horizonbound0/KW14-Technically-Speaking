@@ -6,30 +6,27 @@
             <div class="container">
 
                 <div class="columns is-centered">
-
+                    <!-- -->
+                    {{#each blogs as |blog|}}
                     <div class="card column is-4 mb-0">
 
                         <header class="card-header">
-                            <h2 class="card-header-title"><a href="#">Title/{{blog_title}}</a></h2>
+                            <h2 class="card-header-title"><a href="#">{{blog.blog_title}}</a></h2>
                         </header>
 
                         <div class="card-content">
                             <div class="content">
-                                <p class="subtitle">Date/{{blog_date}}</p>
+                                <p class="subtitle">{{blog.blog_date}}</p>
                             </div>
                         </div>
 
                         <footer class="card-footer">
-                            <a href="#" class="card-footer-item">User/{{username}}</a>
+                            <a href="#" class="card-footer-item">User/{{blog.user}}</a>
                         </footer>
-
+                        
                     </div>
-                    
+                    {{/each}}
                 </div>
-
-                <!--
-                <script src="./js/login.js"></script>
-                -->
 
             </div>
         </div>

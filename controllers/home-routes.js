@@ -1,25 +1,23 @@
 const router = require('express').Router();
-const { User, Blog } = require('../models');
+const { User, Blog, Comment } = require('../models');
 
-// GET all galleries for homepage
+// GET the for homepage
 router.get('/', async (req, res) => {
   try {
-    // const dbBlogData = await Blog.findAll({
-    //   include: [
-    //     {
-    //       model: User,
-    //       as: 'user',
-    //       attributes: 'username',
-    //     },
-    //   ],
-    // });
+    const dbBlogData = await Blog.findAll({
+      /*include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: 'id',
+        },
+      ],*/
+    });
 
-    // const blogs = dbBlogData.map((blog) =>
-    //   blog.get({ plain: true })
-    // );
+    const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
 
     res.render('homepage', {
-      // blogs,
+      blogs,
       loggedIn: req.session.loggedIn,
     });
 
@@ -39,9 +37,19 @@ router.get('/login', (req, res) => {
 });
 
 // Dashboard route
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
+
+    const usersBlogData = await Blog.findAll({
+      where: {
+        user_id: req.session.user_id,
+      }
+    });
+
+    const usersBlogs = usersBlogData.map((blog) => blog.get({ plain: true }));
+
     res.render('dashboard', {
+      usersBlogs,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -50,4 +58,28 @@ router.get('/dashboard', (req, res) => {
   }
 });
 
-module.exports = router;
+// Get all users
+router.get('/users', async (req, res) => {
+  // find all users
+  const userData = await User.findAll();
+
+  return res.json(userData);
+});
+
+// Get all blogs
+router.get('/blogs', async (req, res) => {
+  // find all blogs
+  const blogData = await Blog.findAll();
+
+  return res.json(blogData);
+});
+
+// Get all blogs
+router.get('/comments', async (req, res) => {
+  // find all blogs
+  const commentData = await Comment.findAll();
+
+  return res.json(commentData);
+});
+
+module.exports = router; 
