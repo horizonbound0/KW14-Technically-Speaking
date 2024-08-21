@@ -1,47 +1,66 @@
-<form>
-    <div class="field">
-        <label class="label">Blog Title:</label>
-        <div class="control">
-            <input class="input is-primary" type="text" id="blog-title" placeholder="Title..." />
-        </div>
-    </div>
+<div class="modal">
 
-    <div class="field">
-        <label class="label">Blog Body:</label>
-        <div class="control">
-            <textarea class="textarea is-primary" type="text" id="blog-body" placeholder="Blog..."></textarea>
-        </div>
-    </div>
+    <div class="modal-background"></div>
+    <div class="modal-card">
 
-    <div class="has-text-right">
-        <button class="button is-primary" type="submit">Submit</button>
+        <header class="modal-card-head">
+            <p class="modal-card-title">New Blog</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+
+        <section class="modal-card-body">
+            <form class="blog-form">
+                <div class="field">
+                    <label class="label">Blog Title:</label>
+                    <div class="control">
+                        <input class="input is-primary" type="text" id="blog-title" placeholder="Title..." />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Blog Body:</label>
+                    <div class="control">
+                        <textarea class="textarea is-primary" type="text" id="blog-body"
+                            placeholder="Blog..."></textarea>
+                    </div>
+                </div>
+
+                <div class="has-text-right">
+                    <button class="button is-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </section>
+
     </div>
-</form>
+</div>
+
+<button class="button modalActivate">New Blog?</button>
 
 <section class="section">
     <h1 class="title">Your Blogs</h1>
     <div class="section">
         <div class="container">
-
+            {{#each usersBlogs as |blog|}}
             <div class="columns is-centered">
 
                 <div class="card column is-4 mb-0">
 
                     <header class="card-header">
-                        <h2 class="card-header-title"><a href="#">Title/{{blog_title}}</a></h2>
+                        <h2 class="card-header-title"><a href="#">{{blog.blog_title}}</a></h2>
                     </header>
 
                     <div class="card-content">
                         <div class="content">
-                            <p class="subtitle">Date/{{blog_date}}</p>
+                            <p class="subtitle">{{blog.blog_date}}</p>
                         </div>
                     </div>
 
                 </div>
 
             </div>
-
-            <!-- <script src="./js/login.js"></script> -->
+            {{/each}}
+            <script src="./js/newBlog.js"></script>
+            <script src="./js/saveBlog.js"></script>
 
         </div>
     </div>
